@@ -1,0 +1,17 @@
+{
+  "name": "thinkland-active-learning-agent",
+  "version": "0.1.0",
+  "private": true,
+  "description": "启思岛：面向 9-12 岁儿童的主动学习 Agent MVP",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test --test-isolation=none tests/*.test.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "MIT"
+}
+

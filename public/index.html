@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="启思岛 ThinkLand：面向 9-12 岁儿童的主动学习 Agent" />
+    <title>启思岛 ThinkLand｜主动学习实验室</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#" aria-label="启思岛首页">
+          <span class="brand-mark">启</span>
+          <span><strong>启思岛</strong><small>ThinkLand</small></span>
+        </a>
+
+        <nav class="nav" aria-label="主要导航">
+          <button class="nav-item active" data-view="learn">
+            <span class="nav-icon">✦</span><span>学习实验室</span>
+          </button>
+          <button class="nav-item" data-view="review">
+            <span class="nav-icon">◌</span><span>复习岛</span><span id="reviewBadge" class="badge">0</span>
+          </button>
+          <button class="nav-item" data-view="report">
+            <span class="nav-icon">⌁</span><span>成长报告</span>
+          </button>
+        </nav>
+
+        <div class="island-card">
+          <div class="island-visual" aria-hidden="true">
+            <span class="sun"></span><span class="hill hill-one"></span><span class="hill hill-two"></span>
+          </div>
+          <p class="eyebrow">本周成长</p>
+          <strong><span id="sidebarStars">12</span> 颗星星</strong>
+          <p>再完成 2 次主动讲述，小树就会长大。</p>
+          <div class="mini-progress"><span style="width: 66%"></span></div>
+        </div>
+
+        <div class="profile">
+          <span class="avatar">月</span>
+          <span><strong>小月同学</strong><small>探索者 · Lv. 3</small></span>
+          <button aria-label="更多设置">•••</button>
+        </div>
+      </aside>
+
+      <main>
+        <header class="topbar">
+          <div>
+            <p class="eyebrow" id="pageEyebrow">今天也要把知识讲明白</p>
+            <h1 id="pageTitle">学习实验室</h1>
+          </div>
+          <div class="streak"><span>🔥</span><strong>连续学习 5 天</strong></div>
+        </header>
+
+        <section id="learnView" class="view active">
+          <div class="journey" aria-label="学习进度">
+            <div class="journey-step active"><span>1</span><div><strong>读一读</strong><small>理解材料</small></div></div>
+            <i></i>
+            <div class="journey-step"><span>2</span><div><strong>讲一讲</strong><small>主动输出</small></div></div>
+            <i></i>
+            <div class="journey-step"><span>3</span><div><strong>补一补</strong><small>局部修正</small></div></div>
+            <i></i>
+            <div class="journey-step"><span>4</span><div><strong>记一记</strong><small>延时复习</small></div></div>
+          </div>
+
+          <div class="workspace-grid">
+            <section class="main-card material-panel">
+              <div class="card-head">
+                <div><p class="eyebrow">今日探索任务</p><h2 id="materialTitle">正在准备学习材料…</h2></div>
+                <button id="changeMaterialButton" class="ghost-button">更换材料</button>
+              </div>
+              <div class="meta-row">
+                <span id="materialSubject" class="pill green">科学</span>
+                <span id="materialLevel" class="pill">四年级</span>
+                <span id="materialDuration" class="pill">约 8 分钟</span>
+              </div>
+              <p id="materialIntro" class="material-intro"></p>
+              <article id="materialContent" class="reading"></article>
+              <div class="reading-tip"><span>💡</span><p><strong>见习老师任务</strong><br />读完后合上材料，试着把它讲给“小岛学员”听。讲不完整也没关系，暴露缺口正是学习的开始。</p></div>
+              <button id="startRetellingButton" class="primary-button">我读完了，开始讲述</button>
+            </section>
+
+            <aside class="side-card tutor-card">
+              <div class="tutor-face">岛</div>
+              <p class="eyebrow">启思导师</p>
+              <h3>我不会直接告诉你答案</h3>
+              <p>我会先听你讲，再从最小的提示开始，陪你把缺失的知识拼回来。</p>
+              <ul>
+                <li><span>✓</span>找出已经讲清的部分</li>
+                <li><span>✓</span>定位遗漏和可能的误解</li>
+                <li><span>✓</span>按需要逐级增加帮助</li>
+              </ul>
+              <div class="boundary-note"><strong>导师边界</strong><p>不代写、不抢答、不用负面语言评价儿童。</p></div>
+            </aside>
+          </div>
+
+          <section id="retellSection" class="main-card retell-section hidden">
+            <div class="card-head">
+              <div><p class="eyebrow">主动输出</p><h2>现在，你是小老师</h2></div>
+              <span id="charCounter" class="counter">0 字</span>
+            </div>
+            <p class="muted">不看上面的材料，用自己的话讲清楚“发生了什么、为什么、最后怎样”。</p>
+            <textarea id="retellingInput" rows="7" placeholder="例如：太阳照在水面上以后……"></textarea>
+            <div class="action-row">
+              <button id="backToReadingButton" class="secondary-button">再看一眼材料</button>
+              <button id="analyzeButton" class="primary-button"><span>✦</span> 请导师听我讲</button>
+            </div>
+          </section>
+
+          <section id="analysisSection" class="analysis-section hidden" aria-live="polite">
+            <div class="result-grid">
+              <div class="main-card score-card">
+                <div class="score-ring" id="scoreRing"><strong id="coverageScore">0</strong><span>%</span></div>
+                <div><p class="eyebrow">知识点覆盖</p><h2 id="feedbackTitle">你已经完成主动讲述</h2><p id="feedbackText" class="muted"></p></div>
+              </div>
+              <div class="main-card dependency-card"><p class="eyebrow">提示依赖度</p><strong id="dependencyLabel">尚未使用提示</strong><div class="dependency-scale"><span class="active"></span><span></span><span></span><span></span><span></span></div><small>帮助越少，说明提取越主动</small></div>
+            </div>
+
+            <div class="workspace-grid diagnosis-grid">
+              <section class="main-card">
+                <div class="card-head"><div><p class="eyebrow">语义诊断</p><h2>你的知识地图</h2></div><span class="pill green">可解释结果</span></div>
+                <div id="conceptMap" class="concept-map"></div>
+                <div id="misconceptionBox" class="misconception hidden"></div>
+              </section>
+              <aside class="side-card coaching-card">
+                <p class="eyebrow">局部修正</p>
+                <h3 id="coachTitle">我们只补一小块</h3>
+                <p id="coachQuestion" class="coach-question"></p>
+                <div id="hintBox" class="hint-box hidden"></div>
+                <button id="hintButton" class="secondary-button full">给我一点点提示</button>
+                <button id="reviseButton" class="primary-button full">我想重新讲这一段</button>
+                <button id="scheduleButton" class="text-button">先加入复习岛</button>
+              </aside>
+            </div>
+          </section>
+        </section>
+
+        <section id="reviewView" class="view">
+          <div class="section-intro"><div><p class="eyebrow">主动提取，而不是重复阅读</p><h2>复习岛</h2><p>薄弱知识会在合适的时间再次出现。先回忆，再查看提示。</p></div><div class="big-stat"><strong id="dueCount">0</strong><span>张待复习卡</span></div></div>
+          <div id="reviewList" class="review-list"></div>
+        </section>
+
+        <section id="reportView" class="view">
+          <div class="section-intro"><div><p class="eyebrow">家长可理解的学习证据</p><h2>成长报告</h2><p>关注儿童如何学会，而不只是答对了多少题。</p></div><span class="pill green">本地演示数据</span></div>
+          <div class="stats-grid">
+            <div class="stat-card"><span>本周主动讲述</span><strong id="sessionCount">0</strong><small>次</small></div>
+            <div class="stat-card"><span>平均知识覆盖</span><strong id="averageCoverage">--</strong><small>%</small></div>
+            <div class="stat-card"><span>平均提示等级</span><strong id="averageHint">--</strong><small>/ 4</small></div>
+            <div class="stat-card"><span>待巩固概念</span><strong id="weakConcepts">0</strong><small>个</small></div>
+          </div>
+          <div class="report-grid">
+            <section class="main-card"><div class="card-head"><div><p class="eyebrow">最近学习记录</p><h2>从“讲不清”到“能解释”</h2></div></div><div id="historyList" class="history-list"></div></section>
+            <aside class="side-card parent-note"><p class="eyebrow">给家长的建议</p><h3>少问“记住了吗”</h3><p>可以邀请孩子用自己的话解释一个过程，再追问“为什么”。如果孩子卡住，先给关键词，不急着讲完整答案。</p><div class="quote">“真正的掌握，是能够脱离教材重新组织语言。”</div></aside>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="materialModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="materialModalTitle">
+      <div class="modal-card">
+        <div class="card-head"><div><p class="eyebrow">探索不同主题</p><h2 id="materialModalTitle">选择学习材料</h2></div><button id="closeModalButton" class="icon-button" aria-label="关闭">×</button></div>
+        <div id="materialOptions" class="material-options"></div>
+      </div>
+    </div>
+    <div id="toast" class="toast" role="status"></div>
+    <script src="/app.js" defer></script>
+  </body>
+</html>
+
